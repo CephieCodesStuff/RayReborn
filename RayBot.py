@@ -226,5 +226,5 @@ async def hiatus_error(ctx, error):
     else:
         print(error)
 
-bot.run('NzA5MTMyMzgzNDMzMTMwMDA2.XsJT8g.N2cv65vXisN3fVI8iX8BrR6xDww')
+bot.run(TOKEN)
 
