@@ -230,17 +230,21 @@ async def hiatus_error(ctx, error):
 )
 async def warn(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    user = ctx.message.author.id
+    target = member.id
     channel = bot.get_channel(689592463010168849)
     logembed = discord.Embed(color = 0xa03ca7,
     description = f'<@{member.id}>({member.id}) was reminded to log in by <@{ctx.message.author.id}>')
     logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
-
-    await member.send(f"""Hello {member.name}, Blossoming Serenity bot here 🙂
+    if user == target:
+        await ctx.send("Can't really warn yourself bud")
+    else:
+        await member.send(f"""Hello {member.name}, Blossoming Serenity bot here 🙂
 \nYou have recieved this message due to being offline for almost **14 Days** in Warframe.
 Please, log-in as soon as possible to avoid being kicked from the clan.
 \n**If you can't log in or are taking a break**: let a Warlord or Moderator know about it.\nThank you! 💙""")
-    await ctx.send(embed=embed, delete_after = 3)
-    await channel.send(embed = logembed)
+        await ctx.send(embed=embed, delete_after = 3)
+        await channel.send(embed = logembed)
 @warn.error
 async def name_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
@@ -253,5 +257,4 @@ async def name_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-bot.run("NzA5MTMyMzgzNDMzMTMwMDA2.Xrhc_w.i3RbgmCOIU4-cig9cwYV5RlrNfw")
-
+bot.run("NzQ3OTgwMzU3MTcyODU0ODQ1.X0Ww_Q.LRRcehUkareyhNMQud6PDUojvLo")
