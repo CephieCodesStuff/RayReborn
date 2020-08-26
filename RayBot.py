@@ -94,11 +94,13 @@ async def coinflip(ctx):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def assign(ctx, member : discord.Member):
+#━━━━━Fetches roles to add/remove. Extremely uneffective━━━━━
     roleAdd = member.guild.get_role(573966506644471819)
     roleRemove = member.guild.get_role(573909036379013130)
     roleRemove1 = member.guild.get_role(618114983737425931)
     roleActivity = member.guild.get_role(729056392232697887)
     roleOptIn = member.guild.get_role(729036706690629772)
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━    
     channel = bot.get_channel(689592463010168849)
     welcome = bot.get_channel(573908464087334924)
     time = datetime.datetime.now()
