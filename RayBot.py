@@ -100,7 +100,7 @@ async def assign(ctx, member : discord.Member):
     roleRemove1 = member.guild.get_role(618114983737425931)
     roleActivity = member.guild.get_role(729056392232697887)
     roleOptIn = member.guild.get_role(729036706690629772)
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━    
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     channel = bot.get_channel(689592463010168849)
     welcome = bot.get_channel(573908464087334924)
     time = datetime.datetime.now()
@@ -232,7 +232,10 @@ async def warlord(ctx, member: discord.Member):
     wl = member.guild.get_role(697579282557304933)
     mod = member.guild.get_role(697585255518961685)
     rec = member.guild.get_role(648594572401704971)
+    emoji = '💠'
+    name = member.nick
     await member.add_roles(wl, mod, rec)
+    await member.edit(nick = emoji+name[1:])
     await ctx.send(embed=embed, delete_after = 3)
 @warlord.error
 async def wl_error(ctx, error):
@@ -252,6 +255,9 @@ async def mod(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     mod = member.guild.get_role(697585255518961685)
     rec = member.guild.get_role(648594572401704971)
+    emoji = '🐦'
+    name = member.nick
+    await member.edit(nick = emoji+name[1:])
     await member.add_roles(mod, rec)
     await ctx.send(embed=embed, delete_after = 3)
 @mod.error
@@ -272,6 +278,9 @@ async def mod_error(ctx, error):
 async def rec(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     rec = member.guild.get_role(648594572401704971)
+    emoji = '🦄'
+    name = member.nick
+    await member.edit(nick = emoji+name[1:])
     await member.add_roles(rec)
     await ctx.send(embed=embed, delete_after = 3)
 @rec.error
