@@ -257,4 +257,4 @@ async def name_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-bot.run("NzQ3OTgwMzU3MTcyODU0ODQ1.X0Ww_Q.LRRcehUkareyhNMQud6PDUojvLo")
+bot.run(TOKEN)
