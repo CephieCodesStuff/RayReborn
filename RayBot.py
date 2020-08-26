@@ -232,7 +232,7 @@ async def warlord(ctx, member: discord.Member):
     rec = member.guild.get_role(648594572401704971)
     await member.add_roles(wl, mod, rec)
     await ctx.send(embed=embed, delete_after = 3)
-@wl.error
+@warlord.error
 async def wl_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         await ctx.send("This command is owner only.", delete_after = 3)
@@ -246,7 +246,7 @@ async def wl_error(ctx, error):
 
 @bot.command(name = 'mod')
 @commands.is_owner()
-async def warlord(ctx, member: discord.Member):
+async def mod(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     mod = member.guild.get_role(697585255518961685)
     rec = member.guild.get_role(648594572401704971)
@@ -267,12 +267,12 @@ async def mod_error(ctx, error):
 
 @bot.command(name = 'recruiter', aliases = ['rec'])
 @commands.is_owner()
-async def warlord(ctx, member: discord.Member):
+async def rec(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     rec = member.guild.get_role(648594572401704971)
     await member.add_roles(rec)
     await ctx.send(embed=embed, delete_after = 3)
-@recruiter.error
+@rec.error
 async def rec_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         await ctx.send("This command is owner only.", delete_after = 3)
