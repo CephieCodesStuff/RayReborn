@@ -237,7 +237,7 @@ async def warn(ctx, member:discord.Member):
     description = f'<@{member.id}>({member.id}) was reminded to log in by <@{ctx.message.author.id}>')
     logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
     if user == target:
-        await ctx.send("Can't really warn yourself bud")
+        await ctx.send("Can't really warn yourself bud", delete_after = 3)
     else:
         await member.send(f"""Hello {member.name}, Blossoming Serenity bot here 🙂
 \nYou have recieved this message due to being offline for almost **14 Days** in Warframe.
