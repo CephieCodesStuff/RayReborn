@@ -44,7 +44,7 @@ async def mhelp(ctx):
     Mhelp_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
      icon_url = 'https://bit.ly/2LquDwO'
      )
-    Mhelp_Embed.add_field(name = 'Assignment', value = '``assign`` ``name`` ``strip`` ``hiatus``')
+    Mhelp_Embed.add_field(name = 'Assignment', value = '``assign`` ``name`` ``strip`` ``hiatus`` ``warn``')
     Mhelp_Embed.set_footer(text = 'For regular commands, see >help')
     await ctx.send(embed=Mhelp_Embed)
 @mhelp.error
@@ -55,8 +55,6 @@ async def mhelp_error(ctx, error):
     )
   else:
     print(error)
-
-
 
 
 @bot.command(aliases = ['8ball'])
@@ -114,7 +112,7 @@ async def assign(ctx, member : discord.Member):
     await member.add_roles(roleAdd, roleActivity, roleOptIn)
     await ctx.send(embed = embed, delete_after = 3)
     await channel.send(embed = logembed)
-    await welcome.send(f"Welcome, <@{member.id}> ❤️") 
+    await welcome.send(f"Welcome, <@{member.id}> ❤️")
 @assign.error
 async def avatar_error(ctx, error):
   if isinstance(error, commands.CheckFailure):
@@ -225,6 +223,22 @@ async def hiatus_error(ctx, error):
         await ctx.send("This command is mod-only.", delete_after = 3)
     else:
         print(error)
+
+@bot.command(name='warn')
+@commands.has_any_role(
+697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
+)
+async def warn(ctx, member:discord.Member):
+    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    logembed = discord.Embed(color = 0xa03ca7,
+    description = f'<@{member.id}>({member.id}) was reminded to log in by <@{ctx.message.author.id}>')
+    logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
+
+    await member.send(f"""Hello {member.name}, Blossoming Serenity bot here 🙂
+\nYou have recieved this message due to being offline for almost **14 Days** in Warframe.
+Please, log-in as soon as possible to avoid being kicked from the clan.
+\n**If you can't log in or are taking a break**: let a Warlord or Moderator know about it.\nThank you! 💙""")
+    await ctx.send(embed=embed, delete_after = 3)
 
 bot.run(TOKEN)
 
