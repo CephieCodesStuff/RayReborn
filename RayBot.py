@@ -230,6 +230,7 @@ async def hiatus_error(ctx, error):
 )
 async def warn(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    channel = bot.get_channel(689592463010168849)
     logembed = discord.Embed(color = 0xa03ca7,
     description = f'<@{member.id}>({member.id}) was reminded to log in by <@{ctx.message.author.id}>')
     logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
@@ -239,6 +240,18 @@ async def warn(ctx, member:discord.Member):
 Please, log-in as soon as possible to avoid being kicked from the clan.
 \n**If you can't log in or are taking a break**: let a Warlord or Moderator know about it.\nThank you! 💙""")
     await ctx.send(embed=embed, delete_after = 3)
+    await channel.send(embed = logembed)
+@warn.error
+async def name_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send("This command is mod-only.", delete_after = 3)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please specify the member.", delete_after = 3)
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Invalid member.", delete_after = 3)
+    else:
+        print(error)
+        await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-bot.run(TOKEN)
+bot.run("NzA5MTMyMzgzNDMzMTMwMDA2.Xrhc_w.i3RbgmCOIU4-cig9cwYV5RlrNfw")
 
