@@ -224,7 +224,7 @@ async def hiatus_error(ctx, error):
         print(error)
 
 @bot.command(name = 'wl')
-@bot.is_owner()
+@commands.is_owner()
 async def warlord(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     wl = member.guild.get_role(697579282557304933)
@@ -245,7 +245,7 @@ async def wl_error(ctx, error):
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
 @bot.command(name = 'mod')
-@bot.is_owner()
+@commands.is_owner()
 async def warlord(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     mod = member.guild.get_role(697585255518961685)
@@ -266,7 +266,7 @@ async def mod_error(ctx, error):
 
 
 @bot.command(name = 'recruiter', aliases = ['rec'])
-@bot.is_owner()
+@commands.is_owner()
 async def warlord(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     rec = member.guild.get_role(648594572401704971)
