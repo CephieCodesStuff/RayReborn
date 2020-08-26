@@ -20,11 +20,11 @@ async def on_ready():
     await bot.change_presence(activity = discord.Activity(name ='>help',type = discord.ActivityType.watching))
     print('Bot ready!')
 
-@bot.command()
+@bot.command(name = 'ping') # Regular ping command to check response latency.
 async def ping(ctx):
     await ctx.send(f'Pong! Response latency is: {round(bot.latency*1000)} ms!')
 
-@bot.command(name='help')
+@bot.command(name='help') # Shows bot's commands, duh.
 async def help(ctx):
     Help_Embed = discord.Embed(color = 0xfdcf92)
     Help_Embed.set_author(name = 'List of all available commands(W.I.P)',
@@ -35,7 +35,7 @@ async def help(ctx):
     Help_Embed.set_footer(text = 'For moderation commands, see >mhelp')
     await ctx.send(embed=Help_Embed)
 
-@bot.command(name='mhelp')
+@bot.command(name='mhelp') # Shows moderation commands
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
@@ -57,7 +57,7 @@ async def mhelp_error(ctx, error):
     print(error)
 
 
-@bot.command(aliases = ['8ball'])
+@bot.command(aliases = ['8ball']) # Literally just a  boring 8ball command.
 async def _8ball(ctx, *, question):
     await ctx.message.delete()
     responses = ['It is certain.',
@@ -83,13 +83,13 @@ async def _8ball(ctx, *, question):
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
-@bot.command()
+@bot.command(name = 'coinflip') # Flips a coin!
 async def coinflip(ctx):
     ht = ['Heads','Tails']
     await ctx.send(f'{random.choice(ht)}')
 
 
-@bot.command(name='assign')
+@bot.command(name='assign') # Assigns a person with a clannie role while removing hiatus/newcomer roles.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
@@ -127,7 +127,7 @@ async def avatar_error(ctx, error):
     print(error)
     await ctx.send("Something went wrong. Blame Akarui for coding:/")
 
-@bot.command(name='name')
+@bot.command(name='name') # Adds ✨ in front of user's name.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
@@ -157,7 +157,7 @@ async def name_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-@bot.command(name='avatar')
+@bot.command(name='avatar') # Fetches an avatar of a person.
 async def avatar(ctx, member: discord.Member):
     embed = discord.Embed(description = f"**Profile picture of:** <@{member.id}>", color = 0xfdcf92)
     embed.set_image (url = member.avatar_url)
@@ -171,7 +171,7 @@ async def avatar_error(ctx, error):
     else:
         print(error)
 
-@bot.command(name='strip')
+@bot.command(name='strip') # Removes all person's roles and assigns them with a Newcomer role.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
@@ -199,7 +199,7 @@ async def strip_error(ctx, error):
         print(error)
 
 
-@bot.command(name='hiatus')
+@bot.command(name='hiatus') # Removes person's clannie role and gives them a Hiatus role.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
@@ -223,7 +223,7 @@ async def hiatus_error(ctx, error):
     else:
         print(error)
 
-@bot.command(name = 'wl')
+@bot.command(name = 'wl') # Assigns a warlord.
 @commands.is_owner()
 async def warlord(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
@@ -244,7 +244,7 @@ async def wl_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-@bot.command(name = 'mod')
+@bot.command(name = 'mod') # Assigns a moderator.
 @commands.is_owner()
 async def mod(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
@@ -265,7 +265,7 @@ async def mod_error(ctx, error):
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
 
-@bot.command(name = 'recruiter', aliases = ['rec'])
+@bot.command(name = 'recruiter', aliases = ['rec']) # Assgins a recruiter.
 @commands.is_owner()
 async def rec(ctx, member: discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
@@ -285,7 +285,7 @@ async def rec_error(ctx, error):
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
 
-@bot.command(name='warn')
+@bot.command(name='warn') # Warns a person about being inactive in Warframe.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
