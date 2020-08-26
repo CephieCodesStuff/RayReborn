@@ -90,16 +90,6 @@ async def coinflip(ctx):
     ht = ['Heads','Tails']
     await ctx.send(f'{random.choice(ht)}')
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    if message.content.lower().startswith('hello there'):
-        await message.channel.send(
-      file=discord.File('general.gif')
-        )
-
-    await bot.process_commands(message)
 
 @bot.command(name='assign')
 @commands.has_any_role(
