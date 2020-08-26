@@ -232,6 +232,17 @@ async def warlord(ctx, member: discord.Member):
     rec = member.guild.get_role(648594572401704971)
     await member.add_roles(wl, mod, rec)
     await ctx.send(embed=embed, delete_after = 3)
+@wl.error
+async def wl_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send("This command is owner only.", delete_after = 3)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please specify the member.", delete_after = 3)
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Invalid member.", delete_after = 3)
+    else:
+        print(error)
+        await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
 @bot.command(name = 'mod')
 @bot.is_owner()
@@ -241,6 +252,18 @@ async def warlord(ctx, member: discord.Member):
     rec = member.guild.get_role(648594572401704971)
     await member.add_roles(mod, rec)
     await ctx.send(embed=embed, delete_after = 3)
+@mod.error
+async def mod_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send("This command is owner only.", delete_after = 3)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please specify the member.", delete_after = 3)
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Invalid member.", delete_after = 3)
+    else:
+        print(error)
+        await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
+
 
 @bot.command(name = 'recruiter', aliases = ['rec'])
 @bot.is_owner()
@@ -249,6 +272,18 @@ async def warlord(ctx, member: discord.Member):
     rec = member.guild.get_role(648594572401704971)
     await member.add_roles(rec)
     await ctx.send(embed=embed, delete_after = 3)
+@recruiter.error
+async def rec_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send("This command is owner only.", delete_after = 3)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Please specify the member.", delete_after = 3)
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send("Invalid member.", delete_after = 3)
+    else:
+        print(error)
+        await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
+
 
 @bot.command(name='warn')
 @commands.has_any_role(
