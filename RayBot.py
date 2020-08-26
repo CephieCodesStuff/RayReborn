@@ -207,7 +207,6 @@ async def hiatus(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     channel = bot.get_channel(689592463010168849)
     time = datetime.datetime.now()
-    nl = '\n'
     logembed = discord.Embed(color = 0xa03ca7,
     description = f'<@{member.id}>({member.id}) was removed from the clan by <@{ctx.message.author.id}>')
     logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
@@ -223,6 +222,33 @@ async def hiatus_error(ctx, error):
         await ctx.send("This command is mod-only.", delete_after = 3)
     else:
         print(error)
+
+@bot.command(name = 'wl')
+@bot.is_owner()
+async def warlord(ctx, member: discord.Member):
+    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    wl = member.guild.get_role(697579282557304933)
+    mod = member.guild.get_role(697585255518961685)
+    rec = member.guild.get_role(648594572401704971)
+    await member.add_roles(wl, mod, rec)
+    await ctx.send(embed=embed, delete_after = 3)
+
+@bot.command(name = 'mod')
+@bot.is_owner()
+async def warlord(ctx, member: discord.Member):
+    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    mod = member.guild.get_role(697585255518961685)
+    rec = member.guild.get_role(648594572401704971)
+    await member.add_roles(mod, rec)
+    await ctx.send(embed=embed, delete_after = 3)
+
+@bot.command(name = 'recruiter', aliases = ['rec'])
+@bot.is_owner()
+async def warlord(ctx, member: discord.Member):
+    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+    rec = member.guild.get_role(648594572401704971)
+    await member.add_roles(rec)
+    await ctx.send(embed=embed, delete_after = 3)
 
 @bot.command(name='warn')
 @commands.has_any_role(
