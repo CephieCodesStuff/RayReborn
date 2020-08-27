@@ -334,14 +334,19 @@ async def name_error(ctx, error):
 async def user(ctx, member:discord.Member = None):
     if not member:
         member = ctx.message.author
+    now = datetime.datetime.now().date()
+    date2 = member.joined_at.date()
+    date3 = member.created_at.date()
+    c_diff = abs(now-date3).days
+    j_diff = abs(now-date2).days
     roles = [role.mention for role in member.roles[1:]]
     embed = discord.Embed(color =0xffa07a, title = f'User info of {member.name}', timestamp = ctx.message.created_at)
     embed.add_field(name = 'User ID:', value = member.id, inline = False)
     embed.add_field(name = 'Display name:', value = member.display_name)
-    embed.add_field(name = 'Joined at:', value = member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"),
+    embed.add_field(name = 'Joined at:', value = member.joined_at.strftime(f"%a, %#d %B %Y, %I:%M %p UTC ({j_diff} days ago)"),
      inline = False)
     embed.add_field(name = 'Account created at:', value = member.created_at.strftime(
-    "%a, %#d %B %Y, %I:%M %p UTC"),
+    f"%a, %#d %B %Y, %I:%M %p UTC ({c_diff} days ago)"),
      inline = False)
     embed.add_field(name = "Roles:", value ='   '.join(roles), inline = False)
     embed.add_field(name = "Top role:", value = member.top_role.mention, inline = False)
@@ -359,4 +364,4 @@ async def user(ctx, member:discord.Member = None):
 
 
 
-bot.run(TOKEN)
+bot.run("NzQ3OTgwMzU3MTcyODU0ODQ1.X0Ww_Q.LRRcehUkareyhNMQud6PDUojvLo")
