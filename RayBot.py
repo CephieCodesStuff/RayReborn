@@ -357,7 +357,7 @@ async def user(ctx, member:discord.Member = None):
     embed.add_field(name = "Top role:", value = member.top_role.mention, inline = False)
     embed.add_field(name = "Current status:", value = f'{member.status}', inline = True)
     if member.activity == None:
-        embed.add_field(name = "Current Activity:", value = member.activity, inline = True) # Prevents NoneType exception when user has no activity set.
+        embed.add_field(name = "Current Activity:", value = member.activity, inline = True) # Prevents NoneType error thingy(tm) when user has no activity set.
     else:
         embed.add_field(name = "Current Activity:", value = member.activity.name, inline = True)
     if member.bot: # Checks if a target is a human or a bot.
