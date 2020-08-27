@@ -30,7 +30,7 @@ async def help(ctx):
     Help_Embed.set_author(name = 'List of all available commands(W.I.P)',
      icon_url = 'https://bit.ly/2LquDwO'
      )
-    Help_Embed.add_field(name = '🔨Utility', value = '``help`` ``avatar`` ``ping``', inline = True)
+    Help_Embed.add_field(name = '🔨Utility', value = '``help`` ``avatar`` ``ping`` ``ui``', inline = True)
     Help_Embed.add_field(name = '🎲Fun stuff', value = '``8ball`` ``coinflip``', inline = True)
     Help_Embed.set_footer(text = 'For moderation commands, see >mhelp')
     await ctx.send(embed=Help_Embed)
@@ -105,11 +105,11 @@ async def assign(ctx, member : discord.Member):
     welcome = bot.get_channel(573908464087334924)
     time = datetime.datetime.now()
     embed = discord.Embed(description = 'Done!', color = 0x4cff30)
-    logembed = discord.Embed(
+    logembed = discord.Embed(timestamp = ctx.message.created_at,
     description = f'<@{member.id}>({member.id}) was assigned by <@{ctx.message.author.id}>',
     color = 0xa03ca7
     )
-    logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
+    logembed.set_footer(text = f"Cephalon Ray")
     await member.remove_roles(roleRemove, roleRemove1)
     await member.add_roles(roleAdd, roleActivity, roleOptIn)
     await ctx.send(embed = embed, delete_after = 3)
@@ -139,11 +139,11 @@ async def name(ctx, member: discord.Member, *, nickname = None):
     Emoji = '✨ '
     time = datetime.datetime.now()
     embed = discord.Embed(description = 'Done!', color = 0x4cff30)
-    logembed = discord.Embed(
+    logembed = discord.Embed(timestamp = ctx.message.created_at,
     description = f'<@{member.id}>({member.id}) has recieved a name change from <@{ctx.message.author.id}>',
     color = 0xa03ca7
     )
-    logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
+    logembed.set_footer(text = f"Cephalon Ray")
     await member.edit(nick = Emoji+nickname)
     await ctx.send(embed=embed, delete_after = 3)
     await channel.send(embed=logembed)
@@ -161,7 +161,8 @@ async def name_error(ctx, error):
 
 @bot.command(name='avatar') # Fetches an avatar of a person.
 async def avatar(ctx, member: discord.Member):
-    embed = discord.Embed(description = f"**Profile picture of:** <@{member.id}>", color = 0xfdcf92)
+    embed = discord.Embed(description = f"**Profile picture of:** <@{member.id}>", color = 0xfdcf92,
+    timestamp = ctx.message.created_at)
     embed.set_image (url = member.avatar_url)
     await ctx.send(embed=embed)
 @avatar.error
@@ -181,7 +182,7 @@ async def strip(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     channel = bot.get_channel(689592463010168849)
     nl = '\n'
-    logembed = discord.Embed(color = 0xa03ca7,
+    logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
     description = f'<@{member.id}>({member.id}) was stripped of all roles by <@{ctx.message.author.id}>')
     Newcomer = member.guild.get_role(573909036379013130)
     RolesList = member.roles
@@ -209,9 +210,9 @@ async def hiatus(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     channel = bot.get_channel(689592463010168849)
     time = datetime.datetime.now()
-    logembed = discord.Embed(color = 0xa03ca7,
-    description = f'<@{member.id}>({member.id}) was removed from the clan by <@{ctx.message.author.id}>')
-    logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
+    logembed = discord.Embed(color = 0xa03ca7, description = f'<@{member.id}>({member.id}) was removed from the clan by <@{ctx.message.author.id}>',
+    timestamp = ctx.message.created_at)
+    logembed.set_footer(text = f"Cephalon Ray")
     Break = member.guild.get_role(618114983737425931)
     Clannie = member.guild.get_role(573966506644471819)
     await member.remove_roles(Clannie)
@@ -305,9 +306,9 @@ async def warn(ctx, member:discord.Member):
     user = ctx.message.author.id
     target = member.id
     channel = bot.get_channel(689592463010168849)
-    logembed = discord.Embed(color = 0xa03ca7,
+    logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
     description = f'<@{member.id}>({member.id}) was reminded to log in by <@{ctx.message.author.id}>')
-    logembed.set_footer(text = f"Cephalon Ray• {time.strftime('%I:%M')}")
+    logembed.set_footer(text = f"Cephalon Ray")
     if user == target:
         await ctx.send("Can't really warn yourself bud", delete_after = 3)
     else:
@@ -329,4 +330,33 @@ async def name_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-bot.run(TOKEN)
+@bot.command(name='userinfo', aliases = ['ui'])
+async def user(ctx, member:discord.Member = None):
+    if not member:
+        member = ctx.message.author
+    roles = [role.mention for role in member.roles[1:]]
+    embed = discord.Embed(color =0xffa07a, title = f'User info of {member.name}', timestamp = ctx.message.created_at)
+    embed.add_field(name = 'User ID:', value = member.id, inline = False)
+    embed.add_field(name = 'Display name:', value = member.display_name)
+    embed.add_field(name = 'Joined at:', value = member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"),
+     inline = False)
+    embed.add_field(name = 'Account created at:', value = member.created_at.strftime(
+    "%a, %#d %B %Y, %I:%M %p UTC"),
+     inline = False)
+    embed.add_field(name = "Roles:", value ='   '.join(roles), inline = False)
+    embed.add_field(name = "Top role:", value = member.top_role.mention, inline = False)
+    embed.add_field(name = "Current status:", value = f'{member.status}', inline = True)
+    if member.activity == None:
+        embed.add_field(name = "Current Activity:", value = member.activity, inline = True)
+    else:
+        embed.add_field(name = "Current Activity:", value = member.activity.name, inline = True)
+    if member.bot:
+        embed.add_field(name = 'Bot/Human:', value = 'Bot', inline = True)
+    else:
+        embed.add_field(name = 'Bot/Human:', value = 'Human', inline = True)
+    embed.set_footer(text = 'Cephalon Ray')
+    await ctx.send(embed=embed)
+
+
+
+bot.run('NzA5MTMyMzgzNDMzMTMwMDA2.Xrhc_w.i3RbgmCOIU4-cig9cwYV5RlrNfw')
