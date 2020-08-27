@@ -359,4 +359,4 @@ async def user(ctx, member:discord.Member = None):
 
 
 
-bot.run('NzA5MTMyMzgzNDMzMTMwMDA2.Xrhc_w.i3RbgmCOIU4-cig9cwYV5RlrNfw')
+bot.run(TOKEN)
