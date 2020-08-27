@@ -94,7 +94,7 @@ async def coinflip(ctx):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def assign(ctx, member : discord.Member):
-#━━━━━Fetches roles to add/remove. Extremely uneffective━━━━━
+#━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
     roleAdd = member.guild.get_role(573966506644471819)
     roleRemove = member.guild.get_role(573909036379013130)
     roleRemove1 = member.guild.get_role(618114983737425931)
@@ -330,16 +330,21 @@ async def name_error(ctx, error):
         print(error)
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
-@bot.command(name='userinfo', aliases = ['ui'])
+@bot.command(name='userinfo', aliases = ['ui']) # Shows info about the targeted user.
 async def user(ctx, member:discord.Member = None):
     if not member:
-        member = ctx.message.author
+        member = ctx.message.author # Shows message author's info when no target is specified.
+
+#━━━Fetches current time and date, as well as date when a user created an account and joined the server.━━
     now = datetime.datetime.now().date()
     date2 = member.joined_at.date()
     date3 = member.created_at.date()
+#━━━━Counts days since server join and account registration━━━━
     c_diff = abs(now-date3).days
     j_diff = abs(now-date2).days
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     roles = [role.mention for role in member.roles[1:]]
+#━━━━Builds the embed to send as an output━━━━
     embed = discord.Embed(color =0xffa07a, title = f'User info of {member.name}', timestamp = ctx.message.created_at)
     embed.add_field(name = 'User ID:', value = member.id, inline = False)
     embed.add_field(name = 'Display name:', value = member.display_name)
@@ -352,10 +357,10 @@ async def user(ctx, member:discord.Member = None):
     embed.add_field(name = "Top role:", value = member.top_role.mention, inline = False)
     embed.add_field(name = "Current status:", value = f'{member.status}', inline = True)
     if member.activity == None:
-        embed.add_field(name = "Current Activity:", value = member.activity, inline = True)
+        embed.add_field(name = "Current Activity:", value = member.activity, inline = True) # Prevents NoneType exception when user has no activity set.
     else:
         embed.add_field(name = "Current Activity:", value = member.activity.name, inline = True)
-    if member.bot:
+    if member.bot: # Checks if a target is a human or a bot.
         embed.add_field(name = 'Bot/Human:', value = 'Bot', inline = True)
     else:
         embed.add_field(name = 'Bot/Human:', value = 'Human', inline = True)
