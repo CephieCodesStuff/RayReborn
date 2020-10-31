@@ -367,12 +367,10 @@ async def user(ctx, member:discord.Member = None):
     embed.set_footer(text = 'Cephalon Ray')
     await ctx.send(embed=embed)
 
-@bot.command(name = 'me')
+@bot.command(name = 'me') #"action" command. User "does" something
 async def me(ctx, *, msg):
     auth = ctx.message.author
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
 
-
-
-bot.run('NzQ3OTgwMzU3MTcyODU0ODQ1.X0Ww_Q._FgtTcfTWlOElVHhbJY7OY009_U')
+bot.run(TOKEN)
