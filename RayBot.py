@@ -1,15 +1,9 @@
 import discord
 from discord.ext import commands, tasks
 import random
-import os
 import datetime
-import time
 import discord.utils
 from discord.utils import get
-from itertools import cycle
-from datetime import timezone, tzinfo, timedelta
-import time as timeModule
-
 
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'))
 glodalt = datetime.datetime.now()
@@ -45,7 +39,7 @@ async def mhelp(ctx):
      icon_url = 'https://bit.ly/2LquDwO'
      )
     Mhelp_Embed.add_field(name = 'Assignment', value = '``assign`` ``name`` ``strip`` ``hiatus`` ``warn``')
-    Mhelp_Embed.set_footer(text = 'For regular commands, see >help')
+    Mhelp_Embed.set_footer(text = 'For regular commands, see >help', timestamp = ctx.message.created_at)
     await ctx.send(embed=Mhelp_Embed)
 @mhelp.error
 async def mhelp_error(ctx, error):
@@ -372,5 +366,3 @@ async def me(ctx, *, msg):
     auth = ctx.message.author
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
-
-bot.run(TOKEN)
