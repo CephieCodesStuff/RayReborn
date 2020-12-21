@@ -5,13 +5,14 @@ import datetime
 import discord.utils
 from discord.utils import get
 
-bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'))
+intents = discord.Intents(guilds = True, members = True, messages = True)
+bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity = discord.Activity(name ='>help',type = discord.ActivityType.watching))
+    await bot.change_presence(activity = discord.Activity(name ='for >help',type = discord.ActivityType.watching))
     print('Bot ready!')
 
 @bot.command(name = 'ping') # Regular ping command to check response latency.
