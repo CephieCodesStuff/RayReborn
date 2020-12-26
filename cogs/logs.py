@@ -9,7 +9,7 @@ class Logs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        log_embed = discord.Embed(color = 0xa03ca7, title = f"{member} has joined the server",
+        log_embed = discord.Embed(color = 0x4cff30, title = f"{member} has joined the server",
         timestamp = datetime.datetime.now())
         date = member.created_at.date()
         now = datetime.datetime.now().date()
@@ -25,7 +25,7 @@ class Logs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        log_embed = discord.Embed(color = 0xa03ca7, title = f"{member} has left the server",
+        log_embed = discord.Embed(color = 0xca0b0b, title = f"{member} has left the server",
         timestamp = datetime.datetime.now())
         now = datetime.datetime.now().date()
         date = member.joined_at.date()
