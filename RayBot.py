@@ -1,9 +1,9 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 import random
 import datetime
 import discord.utils
-from discord.utils import get
+import os
 
 intents = discord.Intents(guilds = True, members = True, messages = True)
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
@@ -367,3 +367,12 @@ async def me(ctx, *, msg):
     auth = ctx.message.author
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
+
+with open('token.txt') as token_file:
+    token = token_file.read().strip()
+
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        bot.load_extension(f'Cogs.{filename[:-3]}')
+
+bot.run(token)
