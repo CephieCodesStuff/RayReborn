@@ -115,27 +115,30 @@ async def coinflip(ctx):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def assign(ctx, member : discord.Member):
-#━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
-    roleAdd = member.guild.get_role(573966506644471819)
-    roleRemove = member.guild.get_role(573909036379013130)
-    roleRemove1 = member.guild.get_role(618114983737425931)
-    roleActivity = member.guild.get_role(729056392232697887)
-    roleOptIn = member.guild.get_role(729036706690629772)
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    channel = bot.get_channel(689592463010168849)
-    welcome = bot.get_channel(573908464087334924)
-    time = datetime.datetime.now()
-    embed = discord.Embed(description = 'Done!', color = 0x4cff30)
-    logembed = discord.Embed(timestamp = ctx.message.created_at,
-    description = f'<@{member.id}>({member.id}) was assigned by <@{ctx.message.author.id}>',
-    color = 0xa03ca7
-    )
-    logembed.set_footer(text = f"Cephalon Ray")
-    await member.remove_roles(roleRemove, roleRemove1)
-    await member.add_roles(roleAdd, roleActivity, roleOptIn)
-    await ctx.send(embed = embed, delete_after = 3)
-    await channel.send(embed = logembed)
-    await welcome.send(f"Welcome, <@{member.id}> ❤️")
+    if member == ctx.message.author.id:
+        await ctx.send("Can't use this command on yourself.")
+    else:
+    #━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
+        roleAdd = member.guild.get_role(573966506644471819)
+        roleRemove = member.guild.get_role(573909036379013130)
+        roleRemove1 = member.guild.get_role(618114983737425931)
+        roleActivity = member.guild.get_role(729056392232697887)
+        roleOptIn = member.guild.get_role(729036706690629772)
+    #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        channel = bot.get_channel(689592463010168849)
+        welcome = bot.get_channel(573908464087334924)
+        time = datetime.datetime.now()
+        embed = discord.Embed(description = 'Done!', color = 0x4cff30)
+        logembed = discord.Embed(timestamp = ctx.message.created_at,
+        description = f'<@{member.id}>({member.id}) was assigned by <@{ctx.message.author.id}>',
+        color = 0xa03ca7
+        )
+        logembed.set_footer(text = f"Cephalon Ray")
+        await member.remove_roles(roleRemove, roleRemove1)
+        await member.add_roles(roleAdd, roleActivity, roleOptIn)
+        await ctx.send(embed = embed, delete_after = 3)
+        await channel.send(embed = logembed)
+        await welcome.send(f"Welcome, <@{member.id}> ❤️")
 @assign.error
 async def assign_error(ctx, error):
   if isinstance(error, commands.CheckFailure):
@@ -202,33 +205,39 @@ async def avatar_error(ctx, error):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def guest(ctx, member:discord.Member):
-    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
-    channel = bot.get_channel(689592463010168849)
-    nl = '\n'
-    logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
-    description = f'<@{member.id}>({member.id}) recieved ``Server Guest`` role from <@{ctx.message.author.id}>')
-    Guest = member.guild.get_role(689438890313908255)
-    await member.add_roles(Guest)
-    await ctx.send(embed=embed, delete_after = 3)
-    await channel.send(embed=logembed)
+    if member == ctx.message.author.id:
+        await ctx.send("Can't use this command on yourself.")
+    else:
+        embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+        channel = bot.get_channel(689592463010168849)
+        nl = '\n'
+        logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
+        description = f'<@{member.id}>({member.id}) recieved ``Server Guest`` role from <@{ctx.message.author.id}>')
+        Guest = member.guild.get_role(689438890313908255)
+        await member.add_roles(Guest)
+        await ctx.send(embed=embed, delete_after = 3)
+        await channel.send(embed=logembed)
 
 @bot.command(name='hiatus') # Removes person's clannie role and gives them a Hiatus role.
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def hiatus(ctx, member:discord.Member):
-    embed = discord.Embed(color = 0x4cff30, description = 'Done!')
-    channel = bot.get_channel(689592463010168849)
-    time = datetime.datetime.now()
-    logembed = discord.Embed(color = 0xa03ca7, description = f'<@{member.id}>({member.id}) was removed from the clan by <@{ctx.message.author.id}>',
-    timestamp = ctx.message.created_at)
-    logembed.set_footer(text = f"Cephalon Ray")
-    Break = member.guild.get_role(618114983737425931)
-    Clannie = member.guild.get_role(573966506644471819)
-    await member.remove_roles(Clannie)
-    await member.add_roles(Break)
-    await ctx.send(embed=embed, delete_after = 3)
-    await channel.send(embed=logembed)
+    if member == ctx.message.author.id:
+        await ctx.send("Can't use this command on yourself.")
+    else:
+        embed = discord.Embed(color = 0x4cff30, description = 'Done!')
+        channel = bot.get_channel(689592463010168849)
+        time = datetime.datetime.now()
+        logembed = discord.Embed(color = 0xa03ca7, description = f'<@{member.id}>({member.id}) was removed from the clan by <@{ctx.message.author.id}>',
+        timestamp = ctx.message.created_at)
+        logembed.set_footer(text = f"Cephalon Ray")
+        Break = member.guild.get_role(618114983737425931)
+        Clannie = member.guild.get_role(573966506644471819)
+        await member.remove_roles(Clannie)
+        await member.add_roles(Break)
+        await ctx.send(embed=embed, delete_after = 3)
+        await channel.send(embed=logembed)
 @hiatus.error
 async def hiatus_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
