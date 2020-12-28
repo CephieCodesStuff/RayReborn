@@ -115,7 +115,9 @@ async def coinflip(ctx):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def assign(ctx, member : discord.Member):
-    if member == ctx.message.author.id:
+    user = ctx.message.author.id
+    member = member.id
+    if member == user:
         await ctx.send("Can't use this command on yourself.")
     else:
     #━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
@@ -159,18 +161,23 @@ async def assign_error(ctx, error):
 )
 async def name(ctx, member: discord.Member, *, nickname = None):
     initialName = member.display_name
-    channel = bot.get_channel(689592463010168849)
-    Emoji = '✨ '
-    time = datetime.datetime.now()
-    embed = discord.Embed(description = 'Done!', color = 0x4cff30)
-    logembed = discord.Embed(timestamp = ctx.message.created_at,
-    description = f'<@{member.id}>({member.id}) has recieved a name change from <@{ctx.message.author.id}>',
-    color = 0xa03ca7
-    )
-    logembed.set_footer(text = f"Cephalon Ray")
-    await member.edit(nick = Emoji+nickname)
-    await ctx.send(embed=embed, delete_after = 3)
-    await channel.send(embed=logembed)
+    user = ctx.message.author.id
+    member = member.id
+    if member == user:
+        await ctx.send("Can't use this command on yourself.")
+    else:
+        channel = bot.get_channel(689592463010168849)
+        Emoji = '✨ '
+        time = datetime.datetime.now()
+        embed = discord.Embed(description = 'Done!', color = 0x4cff30)
+        logembed = discord.Embed(timestamp = ctx.message.created_at,
+        description = f'<@{member.id}>({member.id}) has recieved a name change from <@{ctx.message.author.id}>',
+        color = 0xa03ca7
+        )
+        logembed.set_footer(text = f"Cephalon Ray")
+        await member.edit(nick = Emoji+nickname)
+        await ctx.send(embed=embed, delete_after = 3)
+        await channel.send(embed=logembed)
 @name.error
 async def name_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
@@ -205,7 +212,9 @@ async def avatar_error(ctx, error):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def guest(ctx, member:discord.Member):
-    if member == ctx.message.author.id:
+    user = ctx.message.author.id
+    member = member.id
+    if member == user:
         await ctx.send("Can't use this command on yourself.")
     else:
         embed = discord.Embed(color = 0x4cff30, description = 'Done!')
@@ -223,7 +232,9 @@ async def guest(ctx, member:discord.Member):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def hiatus(ctx, member:discord.Member):
-    if member == ctx.message.author.id:
+    user = ctx.message.author.id
+    member = member.id
+    if member == user:
         await ctx.send("Can't use this command on yourself.")
     else:
         embed = discord.Embed(color = 0x4cff30, description = 'Done!')
