@@ -210,13 +210,6 @@ async def guest(ctx, member:discord.Member):
     await member.add_roles(Guest)
     await ctx.send(embed=embed, delete_after = 3)
     await channel.send(embed=logembed)
-@strip.error
-async def guest_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("This command is mod-only.", delete_after = 3)
-    else:
-        print(error)
-
 
 @bot.command(name='hiatus') # Removes person's clannie role and gives them a Hiatus role.
 @commands.has_any_role(
