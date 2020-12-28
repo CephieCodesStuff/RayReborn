@@ -57,7 +57,7 @@ async def mhelp(ctx, command = None):
          )
         Help_Embed.add_field(name = 'Assignment',
         value = '``assign`` ``name`` ``guest`` ``hiatus`` ``warn``')
-        Mhelp_Embed.set_footer(text = 'For regular commands, see >help')
+        Help_Embed.set_footer(text = 'For regular commands, see >help')
         await ctx.send(embed=Mhelp_Embed)
     elif command.lower() in mod_help.keys():
         Help_Embed.set_author(name = f"Command info: {command.lower()}")
