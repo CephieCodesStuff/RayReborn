@@ -22,7 +22,7 @@ async def ping(ctx):
 
 @bot.command(name='help') # Shows bot's commands, duh.
 async def help(ctx, command = None):
-    Help_Embed = discord.Embed(color = 0xfdcf92, timestamp = ctx.message.created_at)
+    Help_Embed = discord.Embed(color = 0xfdcf92)
     if not command:
         Help_Embed.set_author(name = 'List of all available commands(W.I.P)',
          icon_url = 'https://bit.ly/2LquDwO'
@@ -50,7 +50,7 @@ async def help(ctx, command = None):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def mhelp(ctx, command = None):
-    Mhelp_Embed = discord.Embed(color =0xa03ca7, timestamp = ctx.message.created_at)
+    Mhelp_Embed = discord.Embed(color =0xa03ca7)
     if not command:
         Mhelp_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
          icon_url = 'https://bit.ly/2LquDwO'

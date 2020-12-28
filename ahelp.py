@@ -5,6 +5,7 @@ adv_help = {
     "ui" : "Fetches user info. \nIf none is specified shows info about you.",
     "8ball" : "Generic 8ball command.",
     "coinflip" : "Flips a coin."
+    "userinfo" : "Fetches user info. \nIf none is specified shows info about you."
 }
 
 aliases = {
