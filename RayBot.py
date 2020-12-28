@@ -4,7 +4,7 @@ import random
 import datetime
 import discord.utils
 import os
-import ahelp
+import ahelp import adv_help, aliases, mod_help
 
 intents = discord.Intents(guilds = True, members = True, messages = True)
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
@@ -35,9 +35,9 @@ async def help(ctx, command = None):
          inline = True)
         Help_Embed.set_footer(text = "For moderation commands, see >mhelp")
         await ctx.send(embed=Help_Embed)
-    elif command.lower() in ahelp.keys():
+    elif command.lower() in adv_help.keys():
         Help_Embed.set_author(name = f"Command info: {command.lower()}")
-        Help_Embed.add_field(name = "Description:", value = ahelp.get(command),
+        Help_Embed.add_field(name = "Description:", value = adv_help.get(command),
         inline = False)
         Help_Embed.add_field(name = "Aliases:", value = aliases.get(command),
         inline = False)
@@ -62,7 +62,7 @@ async def mhelp(ctx, command = None):
         await ctx.send(embed=Mhelp_Embed)
     elif command.lower() in mod_help.keys():
         Help_Embed.set_author(name = f"Command info: {command.lower()}")
-        Help_Embed.add_field(name = "Description:", value = ahelp.get(command),
+        Help_Embed.add_field(name = "Description:", value = adv_help.get(command),
         inline = False)
         Help_Embed.add_field(name = "Aliases:", value = aliases.get(command),
         inline = False)
