@@ -4,6 +4,7 @@ import random
 import datetime
 import discord.utils
 import os
+import ahelp
 
 intents = discord.Intents(guilds = True, members = True, messages = True)
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
@@ -20,28 +21,54 @@ async def ping(ctx):
     await ctx.send(f'Pong! Response latency is: {round(bot.latency*1000)} ms!')
 
 @bot.command(name='help') # Shows bot's commands, duh.
-async def help(ctx):
+async def help(ctx, command = None):
     Help_Embed = discord.Embed(color = 0xfdcf92)
-    Help_Embed.set_author(name = 'List of all available commands(W.I.P)',
-     icon_url = 'https://bit.ly/2LquDwO'
-     )
-    Help_Embed.add_field(name = '🔨Utility', value = '``help`` ``avatar`` ``ping`` ``ui``', inline = True)
-    Help_Embed.add_field(name = '🎲Fun stuff', value = '``8ball`` ``coinflip``', inline = True)
-    Help_Embed.set_footer(text = 'For moderation commands, see >mhelp')
-    await ctx.send(embed=Help_Embed)
+    if not command:
+        Help_Embed.set_author(name = 'List of all available commands(W.I.P)',
+         icon_url = 'https://bit.ly/2LquDwO'
+         )
+        Help_Embed.add_field(name = '🔨Utility',
+         value = '``help`` ``avatar`` ``ping`` ``ui``',
+         inline = True)
+        Help_Embed.add_field(name = '🎲Fun stuff',
+        value = '``8ball`` ``coinflip``',
+         inline = True)
+        Help_Embed.set_footer(text = "For moderation commands, see >mhelp")
+        await ctx.send(embed=Help_Embed)
+    elif command.lower() in adv_help.keys():
+        Help_Embed.set_author(name = f"Command info: {command.lower()}")
+        Help_Embed.add_field(name = "Description:", value = adv_help.get(command),
+        inline = False)
+        Help_Embed.add_field(name = "Aliases:", value = aliases.get(command),
+        inline = False)
+        await ctx.send(embed=Help_Embed)
+    else:
+        await ctx.send('No such command found, sad.')
 
 @bot.command(name='mhelp') # Shows moderation commands
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
-async def mhelp(ctx):
+async def mhelp(ctx, command = None):
     Mhelp_Embed = discord.Embed(color =0xa03ca7)
-    Mhelp_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
-     icon_url = 'https://bit.ly/2LquDwO'
-     )
-    Mhelp_Embed.add_field(name = 'Assignment', value = '``assign`` ``name`` ``strip`` ``hiatus`` ``warn``')
-    Mhelp_Embed.set_footer(text = 'For regular commands, see >help', timestamp = ctx.message.created_at)
-    await ctx.send(embed=Mhelp_Embed)
+    if not command:
+        Mhelp_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
+         icon_url = 'https://bit.ly/2LquDwO'
+         )
+        Mhelp_Embed.add_field(name = 'Assignment',
+        value = '``assign`` ``name`` ``guest`` ``hiatus`` ``warn``')
+        Mhelp_Embed.set_footer(text = 'For regular commands, see >help',
+        timestamp = ctx.message.created_at)
+        await ctx.send(embed=Mhelp_Embed)
+    elif command.lower() in mod_help.keys():
+        Help_Embed.set_author(name = f"Command info: {command.lower()}")
+        Help_Embed.add_field(name = "Description:", value = adv_help.get(command),
+        inline = False)
+        Help_Embed.add_field(name = "Aliases:", value = aliases.get(command),
+        inline = False)
+        await ctx.send(embed=Help_Embed)
+    else:
+        await ctx.send('No such command found, sad.')
 @mhelp.error
 async def mhelp_error(ctx, error):
   if isinstance(error, commands.CheckFailure):
@@ -169,28 +196,22 @@ async def avatar_error(ctx, error):
     else:
         print(error)
 
-@bot.command(name='strip') # Removes all person's roles and assigns them with a Newcomer role.
+@bot.command(name='guest') # Reverts user back to Server Guest role
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
-async def strip(ctx, member:discord.Member):
+async def guest(ctx, member:discord.Member):
     embed = discord.Embed(color = 0x4cff30, description = 'Done!')
     channel = bot.get_channel(689592463010168849)
     nl = '\n'
     logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
-    description = f'<@{member.id}>({member.id}) was stripped of all roles by <@{ctx.message.author.id}>')
-    Newcomer = member.guild.get_role(573909036379013130)
-    RolesList = member.roles
-    for i in RolesList:
-        if i.name == '@everyone':
-            continue
-        else:
-            await member.remove_roles(i)
-    await member.add_roles(Newcomer)
+    description = f'<@{member.id}>({member.id}) recieved ``Server Guest`` role from <@{ctx.message.author.id}>')
+    Guest = member.guild.get_role(689438890313908255)
+    await member.add_roles(Guest)
     await ctx.send(embed=embed, delete_after = 3)
     await channel.send(embed=logembed)
 @strip.error
-async def strip_error(ctx, error):
+async def guest_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         await ctx.send("This command is mod-only.", delete_after = 3)
     else:
