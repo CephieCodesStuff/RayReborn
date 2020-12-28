@@ -138,7 +138,7 @@ async def assign(ctx, member : discord.Member):
     await channel.send(embed = logembed)
     await welcome.send(f"Welcome, <@{member.id}> ❤️")
 @assign.error
-async def avatar_error(ctx, error):
+async def assign_error(ctx, error):
   if isinstance(error, commands.CheckFailure):
     await ctx.send(
     "This command is mod-only.", delete_after = 3
@@ -182,7 +182,9 @@ async def name_error(ctx, error):
         await ctx.send("Something went wrong. Blame Akarui for bad coding:/")
 
 @bot.command(name='avatar') # Fetches an avatar of a person.
-async def avatar(ctx, member: discord.Member):
+async def avatar(ctx, member: discord.Member = None):
+    if not member:
+        member = ctx.message.author
     embed = discord.Embed(description = f"**Profile picture of:** <@{member.id}>", color = 0xfdcf92,
     timestamp = ctx.message.created_at)
     embed.set_image (url = member.avatar_url)

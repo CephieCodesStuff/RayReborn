@@ -1,8 +1,8 @@
 adv_help = {
     "help" : "Shows this message.",
-    "avatar" : "Fetches pfp of another user.",
+    "avatar" : "Fetches profile picture of another user. \nIf none is specified, fetches your own profile picture",
     "ping" : "Checks bot's response latency.",
-    "ui" : "Fetches user info. If none is specified shows info about you.",
+    "ui" : "Fetches user info. \nIf none is specified shows info about you.",
     "8ball" : "Generic 8ball command.",
     "coinflip" : "Flips a coin."
 }
