@@ -61,7 +61,7 @@ async def mhelp(ctx, command = None):
         await ctx.send(embed=Mhelp_Embed)
     elif command.lower() in mod_help.keys():
         Help_Embed.set_author(name = f"Command info: {command.lower()}")
-        Help_Embed.add_field(name = "Description:", value = adv_help.get(command),
+        Help_Embed.add_field(name = "Description:", value = mod_help.get(command),
         inline = False)
         Help_Embed.add_field(name = "Aliases:", value = aliases.get(command),
         inline = False)
