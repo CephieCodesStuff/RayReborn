@@ -4,7 +4,7 @@ import random
 import datetime
 import discord.utils
 import os
-import ahelp import adv_help, aliases, mod_help
+from ahelp import adv_help, aliases, mod_help
 
 intents = discord.Intents(guilds = True, members = True, messages = True)
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
