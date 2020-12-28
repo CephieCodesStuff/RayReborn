@@ -50,12 +50,12 @@ async def help(ctx, command = None):
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
 async def mhelp(ctx, command = None):
-    Mhelp_Embed = discord.Embed(color =0xa03ca7)
+    Help_Embed = discord.Embed(color =0xa03ca7)
     if not command:
-        Mhelp_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
+        Help_Embed.set_author(name = 'List of all moderation commands(W.I.P)',
          icon_url = 'https://bit.ly/2LquDwO'
          )
-        Mhelp_Embed.add_field(name = 'Assignment',
+        Help_Embed.add_field(name = 'Assignment',
         value = '``assign`` ``name`` ``guest`` ``hiatus`` ``warn``')
         Mhelp_Embed.set_footer(text = 'For regular commands, see >help')
         await ctx.send(embed=Mhelp_Embed)
