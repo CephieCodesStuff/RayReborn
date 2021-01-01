@@ -4,14 +4,14 @@ import random
 import datetime
 import discord.utils
 import os
-import logging
+#import logging
 from ahelp import adv_help, aliases, mod_help
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
 @bot.event
 async def on_ready():
