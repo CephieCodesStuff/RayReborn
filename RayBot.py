@@ -4,12 +4,14 @@ import random
 import datetime
 import discord.utils
 import os
+import logging
 from ahelp import adv_help, aliases, mod_help
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
+logging.basicConfig(level=logging.DEBUG)
 
 @bot.event
 async def on_ready():
@@ -114,7 +116,7 @@ async def coinflip(ctx):
 @commands.has_any_role(
 697579282557304933, 648594572401704971, 697585255518961685, 573909157854314526
 )
-async def assign(ctx, member : discord.Member):
+async def assign(ctx, member:discord.Member):
     user = ctx.message.author.id
     memberid = member.id
     if memberid == user:
@@ -122,8 +124,8 @@ async def assign(ctx, member : discord.Member):
     else:
     #━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
         roleAdd = member.guild.get_role(573966506644471819)
-        roleRemove = member.guild.get_role(573909036379013130)
-        roleRemove1 = member.guild.get_role(618114983737425931)
+        roleRemove = member.guild.get_role(618114983737425931)
+        roleRemove1 = member.guild.get_role(689438890313908255)
         roleActivity = member.guild.get_role(729056392232697887)
         roleOptIn = member.guild.get_role(729036706690629772)
     #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -162,7 +164,7 @@ async def assign_error(ctx, error):
 async def name(ctx, member: discord.Member, *, nickname = None):
     initialName = member.display_name
     user = ctx.message.author.id
-    memberird = member.id
+    memberid = member.id
     if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
@@ -213,7 +215,7 @@ async def avatar_error(ctx, error):
 )
 async def guest(ctx, member:discord.Member):
     user = ctx.message.author.id
-    memberird = member.id
+    memberid = member.id
     if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
@@ -233,7 +235,7 @@ async def guest(ctx, member:discord.Member):
 )
 async def hiatus(ctx, member:discord.Member):
     user = ctx.message.author.id
-    memberird = member.id
+    memberid = member.id
     if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
