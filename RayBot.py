@@ -225,7 +225,9 @@ async def guest(ctx, member:discord.Member):
         logembed = discord.Embed(color = 0xa03ca7, timestamp = ctx.message.created_at,
         description = f'<@{member.id}>({member.id}) recieved ``Server Guest`` role from <@{ctx.message.author.id}>')
         Guest = member.guild.get_role(689438890313908255)
+        Clannie = member.guild.get_role(573966506644471819)
         await member.add_roles(Guest)
+        await member.remove_roles(Clannie)
         await ctx.send(embed=embed, delete_after = 3)
         await channel.send(embed=logembed)
 
