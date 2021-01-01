@@ -6,7 +6,7 @@ import discord.utils
 import os
 from ahelp import adv_help, aliases, mod_help
 
-intents = discord.Intents(guilds = True, members = True, messages = True)
+intents = discord.Intents().all()
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('>'), intents = intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
@@ -116,8 +116,8 @@ async def coinflip(ctx):
 )
 async def assign(ctx, member : discord.Member):
     user = ctx.message.author.id
-    member = member.id
-    if member == user:
+    memberid = member.id
+    if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
     #━━━━━Fetches roles to add/remove. Extremely inefficient━━━━━
@@ -162,8 +162,8 @@ async def assign_error(ctx, error):
 async def name(ctx, member: discord.Member, *, nickname = None):
     initialName = member.display_name
     user = ctx.message.author.id
-    member = member.id
-    if member == user:
+    memberird = member.id
+    if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
         channel = bot.get_channel(689592463010168849)
@@ -213,8 +213,8 @@ async def avatar_error(ctx, error):
 )
 async def guest(ctx, member:discord.Member):
     user = ctx.message.author.id
-    member = member.id
-    if member == user:
+    memberird = member.id
+    if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
         embed = discord.Embed(color = 0x4cff30, description = 'Done!')
@@ -233,8 +233,8 @@ async def guest(ctx, member:discord.Member):
 )
 async def hiatus(ctx, member:discord.Member):
     user = ctx.message.author.id
-    member = member.id
-    if member == user:
+    memberird = member.id
+    if memberid == user:
         await ctx.send("Can't use this command on yourself.")
     else:
         embed = discord.Embed(color = 0x4cff30, description = 'Done!')
