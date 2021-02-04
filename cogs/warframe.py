@@ -70,7 +70,7 @@ class Warframe(commands.Cog):
 
     @commands.command(name="cetus")
     async def cetus(self, ctx):
-        cetus_embed = discord.Embed(title="Cetus state", color=discord.Colour.dark_green(),
+        cetus_embed = discord.Embed(title="Cetus state", color=discord.Colour.green(),
                                     timestamp=ctx.message.created_at)
         request = requests.get("https://api.warframestat.us/pc/cetusCycle")
         bounties_request = requests.get("https://api.warframestat.us/pc/syndicateMissions")
@@ -126,7 +126,7 @@ class Warframe(commands.Cog):
 
     @commands.command(name="cambion")
     async def cambion(self, ctx):
-        cambion_embed = discord.Embed(title="Cambion Drift bonties", color=discord.Colour.dark_red(),
+        cambion_embed = discord.Embed(title="Cambion Drift bonties", color=discord.Colour.orange(),
                                       timestamp=ctx.message.created_at)
 #       request = requests.get("https://api.warframestat.us/pc/cambionCycle") // Outdated info from the API, ignoring.
         bounties_request = requests.get("https://api.warframestat.us/pc/syndicateMissions")
