@@ -98,7 +98,7 @@ class Warframe(commands.Cog):
 
     @commands.command(name="vallis")
     async def vallis(self, ctx):
-        vallis_embed = discord.Embed(title="Orb Vallis state", color=discord.Colour.teal(),
+        vallis_embed = discord.Embed(title="Orb Vallis state", color=discord.Colour.blue(),
                                      timestamp=ctx.message.created_at)
         request = requests.get("https://api.warframestat.us/pc/vallisCycle")
         bounties_request = requests.get("https://api.warframestat.us/pc/syndicateMissions")
