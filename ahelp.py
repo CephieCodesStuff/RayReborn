@@ -17,7 +17,7 @@ adv_help = {
 
 aliases = {
     "ui": "userinfo",
-    "nw": "nightwave"
+    "nightwave": "nw"
 }
 
 mod_help = {

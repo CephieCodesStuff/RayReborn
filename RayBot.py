@@ -35,12 +35,13 @@ async def help(ctx, command=None):
                               )
         Help_Embed.add_field(name='🔨Utility',
                              value='``help`` ``avatar`` ``ping`` ``ui``',
-                             inline=True)
+                             inline=False)
         Help_Embed.add_field(name='🎲Fun stuff',
                              value='``8ball`` ``coinflip`` ``me``',
-                             inline=True)
+                             inline=False)
         Help_Embed.add_field(name="🤖 Warframe info",
-                             value="``news`` ``cetus`` ``nightwave`` ``baro`` ``cetus``\n``vallis`` ``cambion``")
+                             value="``news`` ``cetus`` ``nightwave`` ``baro`` ``cetus````vallis`` ``cambion``",
+                             inline=False)
         Help_Embed.set_footer(text="For moderation commands, see >mhelp")
         await ctx.send(embed=Help_Embed)
     elif command.lower() in adv_help.keys():
