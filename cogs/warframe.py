@@ -126,7 +126,7 @@ class Warframe(commands.Cog):
 
     @commands.command(name="cambion")
     async def cambion(self, ctx):
-        cambion_embed = discord.Embed(title="Cambion Drift bonties", color=discord.Colour.orange(),
+        cambion_embed = discord.Embed(title="Cambion Drift bounties", color=discord.Colour.orange(),
                                       timestamp=ctx.message.created_at)
 #       request = requests.get("https://api.warframestat.us/pc/cambionCycle") // Outdated info from the API, ignoring.
         bounties_request = requests.get("https://api.warframestat.us/pc/syndicateMissions")
