@@ -34,13 +34,14 @@ async def help(ctx, command=None):
                               icon_url='https://tinyurl.com/1fz6h0dv'
                               )
         Help_Embed.add_field(name='🔨Utility',
-                             value='``help`` ``avatar`` ``ping`` ``ui``',
+                             value='`help` `avatar` `ping` `ui`',
                              inline=False)
         Help_Embed.add_field(name='🎲Fun stuff',
-                             value='``8ball`` ``coinflip`` ``do``',
+                             value='`8ball` `coinflip` `do`',
                              inline=False)
         Help_Embed.add_field(name="🤖 Warframe info",
-                             value="``news`` ``cetus`` ``nightwave`` ``baro`` ``cetus`` ``vallis`` ``cambion``",
+                             value="`news` `cetus` `nightwave` `baro` `cetus` `vallis` `cambion`\n"
+                                   "`sortie`",
                              inline=False)
         Help_Embed.set_footer(text="For moderation commands, see >mhelp | Type >help <command> for more info")
         await ctx.send(embed=Help_Embed)

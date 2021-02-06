@@ -15,7 +15,8 @@ adv_help = {
     "nightwave": "Shows this week's nightwave missions",
     "nw": "Shows this week's nightwave missions",
     "baro": "**WIP** Shows info about time left until Baro arrival and destination relay.",
-    "cambion": "Shows Cambion Drift bounties(Without Isolation Vaults)"
+    "cambion": "Shows Cambion Drift bounties(Without Isolation Vaults)",
+    "sortie": "Shows current Sortie info"
 }
 
 aliases = {

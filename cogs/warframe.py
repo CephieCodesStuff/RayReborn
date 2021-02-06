@@ -143,6 +143,29 @@ class Warframe(commands.Cog):
         cambion_embed.set_footer(text="Cephalon Ray")
         await ctx.send(embed=cambion_embed)
 
+    @commands.command(name="sortie")
+    async def sorties(self, ctx):
+        request = requests.get("https://api.warframestat.us/pc/sortie")
+        sortie = request.json()
+        faction = sortie["faction"]
+        mission_no = 0
+        sortie_embed = discord.Embed(title=f"Today's Sortie | {faction}", color=discord.Colour.purple(),
+                                     timestamp=ctx.message.created_at)
+        sortie_embed.add_field(name="Time left", value=sortie["eta"], inline=False)
+        for mission in sortie["variants"]:
+            modifier = mission["modifier"]
+            modifier_desc = mission["modifierDescription"]
+            node = mission["node"]
+            mission_type = mission["missionType"]
+            sortie_embed.add_field(name=f"Mission #{mission_no + 1} | {node}",
+                                   value=f"**Mission type:** {mission_type}"
+                                         f"\n**Modifier:** {modifier}"
+                                         f"\n**Description:** {modifier_desc}", inline=False)
+            mission_no += 1
+        sortie_embed.set_thumbnail(url="https://tinyurl.com/2jpomv94")
+        sortie_embed.set_footer(text="Cephalon Ray")
+        await ctx.send(embed=sortie_embed)
+
 
 def setup(bot):
     bot.add_cog(Warframe(bot))
