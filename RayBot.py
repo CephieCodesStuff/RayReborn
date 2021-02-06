@@ -37,12 +37,12 @@ async def help(ctx, command=None):
                              value='``help`` ``avatar`` ``ping`` ``ui``',
                              inline=False)
         Help_Embed.add_field(name='🎲Fun stuff',
-                             value='``8ball`` ``coinflip`` ``me``',
+                             value='``8ball`` ``coinflip`` ``do``',
                              inline=False)
         Help_Embed.add_field(name="🤖 Warframe info",
                              value="``news`` ``cetus`` ``nightwave`` ``baro`` ``cetus`` ``vallis`` ``cambion``",
                              inline=False)
-        Help_Embed.set_footer(text="For moderation commands, see >mhelp")
+        Help_Embed.set_footer(text="For moderation commands, see >mhelp | Type >help <command> for more info")
         await ctx.send(embed=Help_Embed)
     elif command.lower() in adv_help.keys():
         Help_Embed.set_author(name=f"Command info: {command.lower()}")
@@ -438,8 +438,8 @@ async def user(ctx, member: discord.Member = None):
     await ctx.send(embed=embed)
 
 
-@bot.command(name='me')  # "action" command. User "does" something
-async def me(ctx, *, msg):
+@bot.command(name='do')  # "action" command. User "does" something
+async def do(ctx, *, msg):
     auth = ctx.message.author
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
