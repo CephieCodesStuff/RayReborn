@@ -4,6 +4,8 @@ import random
 import datetime
 import discord.utils
 import os
+import asyncio
+from itertools import cycle
 # import logging
 from ahelp import adv_help, aliases, mod_help
 
@@ -11,6 +13,17 @@ intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('>'), intents=intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
+status = [">help", "Anime", "You", "Minecraft let's plays"]
+
+
+async def change_status():
+    await bot.wait_until_ready()
+    msgs = cycle(status)
+    while not bot.is_closed():
+        current_status = next(msgs)
+        await bot.change_presence(activity=discord.Activity(name=current_status,
+                                                            type=discord.ActivityType.watching))
+        await asyncio.sleep(120)
 
 
 # logging.basicConfig(level=logging.DEBUG)
@@ -453,4 +466,5 @@ for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
+bot.loop.create_task(change_status())
 bot.run(token)
