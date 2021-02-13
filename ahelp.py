@@ -14,7 +14,8 @@ adv_help = {
     "vallis": "Shows info about Orb Vallis cold/warm cycle and bounties",
     "nightwave": "Shows this week's nightwave missions",
     "nw": "Shows this week's nightwave missions",
-    "baro": "**WIP** Shows info about time left until Baro arrival and destination relay.",
+    "baro": " Shows info about time left until Baro arrival and destination relay.\n"
+            "Shows Baro's stock when he's in a Relay.",
     "cambion": "Shows Cambion Drift bounties(Without Isolation Vaults)",
     "sortie": "Shows current Sortie info"
 }

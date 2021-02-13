@@ -59,11 +59,18 @@ class Warframe(commands.Cog):
         baro_embed = discord.Embed(title="Baro Ki'Teer",color=discord.Colour.gold(), timestamp=ctx.message.created_at)
         request = requests.get("https://api.warframestat.us/pc/voidTrader")
         baro = request.json()
-        baro_embed.add_field(name="Arrives in", value=baro["startString"], inline=False)
-        baro_embed.add_field(name="Relay:", value=baro["location"], inline=False)
         if not baro["inventory"]:
+            baro_embed.add_field(name="Arrives in", value=baro["startString"], inline=False)
+            baro_embed.add_field(name="Relay:", value=baro["location"], inline=False)
             baro_embed.add_field(name="Inventory", value="Baro Ki'Teer is yet to arrive.", inline=False)
-#       else show what Baro has in stock. Need to wait for him to appear to see what API outputs:(
+        else:
+            baro_embed.add_field(name="Relay:", value=baro["location"], inline=False)
+            for item in baro["inventory"]:
+                ducats = item["ducats"]
+                creds = item["credits"]
+                item_name = item["item"]
+                baro_embed.add_field(name=item_name, value=f"{ducats} <:Ducats:573969761109803056> +\n"
+                                                           f"{creds} <:Credits:573969762099527684>")
         baro_embed.set_thumbnail(url="https://tinyurl.com/2bmp8vd7")
         baro_embed.set_footer(text="Cephalon Ray")
         await ctx.send(embed=baro_embed)
