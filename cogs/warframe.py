@@ -119,8 +119,8 @@ class Warframe(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get("https://api.warframestat.us/pc/vallisCycle") as request:
                 async with session.get("https://api.warframestat.us/pc/syndicateMissions") as bounties_request:
-                    vallis_time = request.json()
-                    vallis_bounties = bounties_request.json()
+                    vallis_time = await request.json()
+                    vallis_bounties = await bounties_request.json()
                     vallis_syndicate = vallis_bounties[2]
                     time_left = vallis_time["shortString"]
                     if vallis_time["isWarm"]:
