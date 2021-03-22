@@ -166,7 +166,7 @@ class Warframe(commands.Cog):
     @commands.command(name="sortie")
     async def sorties(self, ctx):
         async with aiohttp.ClientSession() as session:
-            async with session.get("https://api.warframestat.us/pc/nightwave") as request:
+            async with session.get("https://api.warframestat.us/pc/sortie") as request:
                 sortie = await request.json()
                 faction = sortie["faction"]
                 mission_no = 0
