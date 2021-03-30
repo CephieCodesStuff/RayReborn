@@ -226,9 +226,11 @@ async def name_error(ctx, error):
 async def avatar(ctx, member: discord.Member = None):
     if not member:
         member = ctx.message.author
-    embed = discord.Embed(description=f"**Profile picture of:** <@{member.id}>", color=0xfdcf92,
+    embed = discord.Embed(title=f"**Profile picture of:** {member}", description=f"[Link]({member.avatar_url})",
+                          color=0xfdcf92,
                           timestamp=ctx.message.created_at)
     embed.set_image(url=member.avatar_url)
+    embed.set_footer(text="Cephalon Ray")
     await ctx.send(embed=embed)
 
 
