@@ -36,7 +36,7 @@ async def on_ready():
     print('Bot ready!')
     change_status.start()
 
-
+@bot.event
 async def on_message(message):
     emoji = bot.get_emoji(573959003391131648)
     if bot.user.mentioned_in(message):
