@@ -13,10 +13,10 @@ intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('>'), intents=intents)
 glodalt = datetime.datetime.now()
 bot.remove_command('help')
-status = [">help", "Anime", "You", "Minecraft let's plays", "twitch.tv/skijesus"]
+status = [">help", "Anime", "You", "Minecraft let's plays", "twitch.tv/skijesus",
+          "Lunaro e-sports"]
 
 
-status = [">help", "Anime", "You", "Minecraft let's plays", "Lunaro e-sports"]
 
 
 @tasks.loop(minutes=5)
@@ -35,13 +35,6 @@ async def change_status():
 async def on_ready():
     print('Bot ready!')
     change_status.start()
-
-
-@bot.event # pointless thing
-async def on_message(message):
-    emoji = bot.get_emoji(573959003391131648)
-    if bot.user.mentioned_in(message):
-        await message.add_reaction(emoji)
 
 
 @bot.command(name='ping')  # Regular ping command to check response latency.
@@ -469,6 +462,12 @@ async def do(ctx, *, msg):
     auth = ctx.message.author
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
+
+@bot.event # pointless thing
+async def on_message(message):
+    emoji = bot.get_emoji(573959003391131648)
+    if bot.user.mentioned_in(message):
+        await message.add_reaction(emoji)
 
 
 with open('token.txt') as token_file:
