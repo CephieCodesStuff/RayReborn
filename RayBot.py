@@ -36,6 +36,11 @@ async def on_ready():
     print('Bot ready!')
     change_status.start()
 
+async def on_message(message):
+    emoji = bot.get_emoji(573959003391131648)
+    if bot.user.mentioned_in(message):
+        await message.add_reaction(emoji)
+
 
 @bot.command(name='ping')  # Regular ping command to check response latency.
 async def ping(ctx):
@@ -463,11 +468,6 @@ async def do(ctx, *, msg):
     await ctx.message.delete()
     await ctx.send(f'**{auth.display_name}** ' + msg)
 
-@bot.event # pointless thing
-async def on_message(message):
-    emoji = bot.get_emoji(573959003391131648)
-    if bot.user.mentioned_in(message):
-        await message.add_reaction(emoji)
 
 
 with open('token.txt') as token_file:
