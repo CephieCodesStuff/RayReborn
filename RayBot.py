@@ -34,6 +34,13 @@ async def on_ready():
     print('Bot ready!')
 
 
+@bot.event # pointless thing
+async def on_message(message):
+    emoji = bot.get_emoji(573959003391131648)
+    if bot.user.mentioned_in(message):
+        await message.add_reaction(emoji)
+
+
 @bot.command(name='ping')  # Regular ping command to check response latency.
 async def ping(ctx):
     await ctx.send(f'Pong! Response latency is: {round(bot.latency * 1000)} ms!')
