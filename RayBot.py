@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import random
 import datetime
 import discord.utils
@@ -16,6 +16,10 @@ bot.remove_command('help')
 status = [">help", "Anime", "You", "Minecraft let's plays", "twitch.tv/skijesus"]
 
 
+status = [">help", "Anime", "You", "Minecraft let's plays", "Lunaro e-sports"]
+
+
+@tasks.loop(minutes=5)
 async def change_status():
     await bot.wait_until_ready()
     msgs = cycle(status)
@@ -23,15 +27,14 @@ async def change_status():
         current_status = next(msgs)
         await bot.change_presence(activity=discord.Activity(name=current_status,
                                                             type=discord.ActivityType.watching))
-        await asyncio.sleep(120)
 
 
 # logging.basicConfig(level=logging.DEBUG)
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(name='for >help', type=discord.ActivityType.watching))
     print('Bot ready!')
+    change_status.start()
 
 
 @bot.event # pointless thing
@@ -475,5 +478,4 @@ for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-bot.loop.create_task(change_status())
 bot.run(token)
