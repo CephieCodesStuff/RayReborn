@@ -41,6 +41,7 @@ async def on_message(message):
     emoji = bot.get_emoji(573959003391131648)
     if bot.user.mentioned_in(message):
         await message.add_reaction(emoji)
+    await bot.process_commands(message)
 
 
 @bot.command(name='ping')  # Regular ping command to check response latency.
